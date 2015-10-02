@@ -28,9 +28,9 @@ run = "1"
 
 while (run != "0")
   while (@player1 != 0)
-    p "Player1! What's the right answer?"
-    p prompt_player
-    p verify_answer
+    puts "Player1! What's the right answer?"
+    prompt_player
+    verify_answer
     if (verify_answer == false)
       @player1 -= 1
       puts "Wrong"
@@ -41,9 +41,9 @@ while (run != "0")
     break
   end
   while (@player2 != 0)
-    p "Player 2! What's the answer?"
-    p prompt_player
-    p verify_answer
+    puts "Player 2! What's the answer?"
+    prompt_player
+    verify_answer
     if (verify_answer == false)
       @player2 -= 1
       puts "Wrong"
