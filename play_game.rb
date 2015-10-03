@@ -1,5 +1,6 @@
 require_relative 'player'
 require 'pry'
+require 'colorize'
 # Interface between standard I/O and player info/behavior
 class PlayGame
   attr_accessor :player1, :player2
@@ -51,10 +52,10 @@ class PlayGame
   #Checks the answer of the player compared to the total of the math question
   def verify_answer(answer)
     if answer == @total.to_s
-      puts "Right!"
+      puts "Right!".green
       @current_player.get_point
     else
-      puts "Wrong! The correct answer is #{@total}"
+      puts "Wrong! The correct answer is #{@total}.".red
       @current_player.lose_life
     end
   end
@@ -83,9 +84,9 @@ class PlayGame
     if (@player1.lives == 0 && @player2.lives == 0)
       puts "It's a tie!"
     elsif @player1.lives == 0
-      puts "#{@player2.name} is the winner with a life count of #{@player2.lives} and #{@player2.point} points!"
+      puts "#{@player2.name} is the winner with a life count of #{@player2.lives} and #{@player2.point} points!".green
     else
-      puts "#{@player1.name} is the winner with a life count of #{@player1.lives} and #{@player2.point} points!"
+      puts "#{@player1.name} is the winner with a life count of #{@player1.lives} and #{@player2.point} points!".green
     end
   end
 
