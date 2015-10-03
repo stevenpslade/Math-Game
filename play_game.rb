@@ -19,8 +19,7 @@ class PlayGame
 
   # Generates a random number from 0 to 20
   def random_number
-    num = rand(0..20)
-    num.floor
+    rand(0..20)
   end
 
   # Generates a random math operator
@@ -53,6 +52,7 @@ class PlayGame
   def verify_answer(answer)
     if answer == @total.to_s
       puts "Right!"
+      @current_player.get_point
     else
       puts "Wrong! The correct answer is #{@total}"
       @current_player.lose_life
@@ -62,6 +62,11 @@ class PlayGame
   # Let's the player's know their life count
   def life_count
     puts "#{@player1.name}'s lives: #{@player1.lives}\n#{@player2.name}'s lives: #{@player2.lives}"
+  end
+
+  # Let's the player's know points score
+  def point_count
+    puts "#{@player1.name}'s points: #{@player1.point}\n#{@player2.name}'s points: #{@player2.point}"
   end
 
   # Switches which player is currently playing
@@ -78,9 +83,9 @@ class PlayGame
     if (@player1.lives == 0 && @player2.lives == 0)
       puts "It's a tie!"
     elsif @player1.lives == 0
-      puts "#{@player2.name} is the winner with a life count of #{@player2.lives}!"
+      puts "#{@player2.name} is the winner with a life count of #{@player2.lives} and #{@player2.point} points!"
     else
-      puts "#{@player1.name} is the winner with a life count of #{@player1.lives}!"
+      puts "#{@player1.name} is the winner with a life count of #{@player1.lives} and #{@player2.point} points!"
     end
   end
 
@@ -91,11 +96,12 @@ class PlayGame
     if answer == "yes"
       @player1.lives = 3
       @player2.lives = 3
+      # Use the below if we want points to reset every game
+      #@player1.point = 0
+      #@player2.point = 0
       start
-    elsif answer == "no"
+    else answer == "no"
       puts "Goodbye!"
-    else
-      puts "Please write yes or no"
     end   
   end
 
@@ -106,6 +112,7 @@ class PlayGame
       ask_question
       verify_answer(get_player_answer(@current_player))
       life_count
+      point_count
       rotate_players
     end
     declare_winner
